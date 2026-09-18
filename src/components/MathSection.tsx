@@ -3,6 +3,8 @@ import { MATH_TASK_CHIPS, MATH_FORMULAS, type FormulaItem } from '../data/mathDa
 import { KaTeXRenderer } from './KaTeXRenderer';
 import { Search, Copy, Check, Sparkles, ExternalLink, Lightbulb } from 'lucide-react';
 
+import { TaskChipsBar } from './TaskChipsBar';
+
 interface MathSectionProps {
   searchQuery: string;
 }
@@ -46,26 +48,13 @@ export const MathSection: React.FC<MathSectionProps> = ({ searchQuery }) => {
 
   return (
     <div className="space-y-6">
-      {/* Task Filter Chips - Material Design 3 Pills */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
-        {MATH_TASK_CHIPS.map((chip) => {
-          const isSelected = selectedChip === chip.value;
-          return (
-            <button
-              key={chip.value}
-              onClick={() => setSelectedChip(chip.value)}
-              className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wider whitespace-nowrap transition-all flex items-center gap-1.5 cursor-pointer ${
-                isSelected
-                  ? 'bg-[#cba6f7] text-[#11111b] shadow-sm font-bold'
-                  : 'bg-[#252538] text-[#cdd6f4] hover:bg-[#313244]'
-              }`}
-            >
-              {chip.label.includes('Новое') && <Sparkles className="w-3.5 h-3.5" />}
-              {chip.label}
-            </button>
-          );
-        })}
-      </div>
+      {/* Task Filter Chips with Smooth Wheel Scroll & Navigation Arrows */}
+      <TaskChipsBar
+        chips={MATH_TASK_CHIPS}
+        selectedChip={selectedChip}
+        onSelectChip={setSelectedChip}
+        accentBg="bg-[#cba6f7]"
+      />
 
       {/* Grid of Formulas */}
       {filteredFormulas.length === 0 ? (

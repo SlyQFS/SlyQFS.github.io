@@ -17,8 +17,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   setSearchQuery,
 }) => {
   return (
-    <header className="sticky top-0 z-30 bg-[#1e1e2e]/90 backdrop-blur-md pb-2 pt-4 px-4 sm:px-8 border-b border-[#313244]/40">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+    <header className="sticky top-0 z-30 bg-[#1e1e2e]/90 backdrop-blur-md border-b border-[#313244]/40">
+      <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col md:flex-row items-center justify-between gap-4">
         {/* Search Bar - on the LEFT (like Gmail/Material 3) */}
         <div className="w-full md:w-96 relative">
           <Search className="w-4 h-4 text-[#a6adc8] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />

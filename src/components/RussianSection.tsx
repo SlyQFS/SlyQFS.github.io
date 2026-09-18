@@ -19,6 +19,7 @@ import {
   AlertTriangle,
   HelpCircle
 } from 'lucide-react';
+import { TaskChipsBar } from './TaskChipsBar';
 
 interface RussianSectionProps {
   searchQuery: string;
@@ -105,25 +106,13 @@ export const RussianSection: React.FC<RussianSectionProps> = ({ searchQuery }) =
 
   return (
     <div className="space-y-6">
-      {/* Sequential Task Chips Filter - Material Design 3 Pills */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
-        {RUSSIAN_TASK_CHIPS.map((chip) => {
-          const isSelected = selectedTask === chip.value;
-          return (
-            <button
-              key={chip.value}
-              onClick={() => setSelectedTask(chip.value)}
-              className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wider whitespace-nowrap transition-all cursor-pointer ${
-                isSelected
-                  ? 'bg-[#a6e3a1] text-[#11111b] shadow-sm font-bold'
-                  : 'bg-[#252538] text-[#cdd6f4] hover:bg-[#313244]'
-              }`}
-            >
-              {chip.label}
-            </button>
-          );
-        })}
-      </div>
+      {/* Sequential Task Chips Filter with Smooth Wheel Scroll & Navigation Arrows */}
+      <TaskChipsBar
+        chips={RUSSIAN_TASK_CHIPS}
+        selectedChip={selectedTask}
+        onSelectChip={setSelectedTask}
+        accentBg="bg-[#a6e3a1]"
+      />
 
       {/* 1. ORTHOEPY / STRESS SECTION (№4) */}
       {showStress && (

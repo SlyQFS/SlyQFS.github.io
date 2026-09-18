@@ -1,7 +1,9 @@
 import React, { useState, useMemo } from 'react';
 import { PHYSICS_TASK_CHIPS, PHYSICS_FORMULAS, type PhysicsFormula } from '../data/physicsData';
 import { KaTeXRenderer } from './KaTeXRenderer';
-import { Search, Copy, Check, ShieldAlert, ExternalLink, Info } from 'lucide-react';
+import { Search, Copy, Check, ExternalLink, Info } from 'lucide-react';
+
+import { TaskChipsBar } from './TaskChipsBar';
 
 interface PhysicsSectionProps {
   searchQuery: string;
@@ -54,26 +56,13 @@ export const PhysicsSection: React.FC<PhysicsSectionProps> = ({ searchQuery }) =
 
   return (
     <div className="space-y-6">
-      {/* Task Filter Chips - Material Design 3 Pills */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
-        {PHYSICS_TASK_CHIPS.map((chip) => {
-          const isSelected = selectedChip === chip.value;
-          return (
-            <button
-              key={chip.value}
-              onClick={() => setSelectedChip(chip.value)}
-              className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wider whitespace-nowrap transition-all flex items-center gap-1.5 cursor-pointer ${
-                isSelected
-                  ? 'bg-[#89dceb] text-[#11111b] shadow-sm font-bold'
-                  : 'bg-[#252538] text-[#cdd6f4] hover:bg-[#313244]'
-              }`}
-            >
-              {chip.value === '26' && <ShieldAlert className="w-3.5 h-3.5" />}
-              {chip.label}
-            </button>
-          );
-        })}
-      </div>
+      {/* Task Filter Chips with Smooth Wheel Scroll & Navigation Arrows */}
+      <TaskChipsBar
+        chips={PHYSICS_TASK_CHIPS}
+        selectedChip={selectedChip}
+        onSelectChip={setSelectedChip}
+        accentBg="bg-[#89dceb]"
+      />
 
       {/* Grid of Formulas */}
       {filteredFormulas.length === 0 ? (
